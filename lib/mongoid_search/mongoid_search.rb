@@ -14,8 +14,7 @@ module Mongoid::Search
     @classes
   end
 
-  module ClassMethods #:nodoc:
-    # Set a field or a number of fields as sources for search
+  # Set a field or a number of fields as sources for search
     def search_in(*args)
       options = args.last.is_a?(Hash) && [:match, :allow_empty_search, :relevant_search, :stem_keywords, :ignore_list].include?(args.last.keys.first) ? args.pop : {}
       self.match              = [:any, :all].include?(options[:match]) ? options[:match] : :any
@@ -95,8 +94,7 @@ module Mongoid::Search
     def index_keywords!
       all.each { |d| d.index_keywords! ? Log.green(".") : Log.red("F") }
     end
-  end
-
+  
   def index_keywords!
     update_attribute(:_keywords, set_keywords)
   end
